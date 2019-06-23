@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="container-panel" *ngIf="dataReceived">
+    <div class="row">
+      <img src="../../assets/images/search-icon.png" class="search-icon" alt="search icon">
+      <input #keyword id=0 tabIndex="0" class="search-box" type="text" placeholder="Search users by ID, address, name"
+        autofocus [(ngModel)]="searchText" />
+      <img src="../../assets/images/close-icon.svg" class="close-icon" (click)="clearSearch()" alt="clear search text">
+
+    </div>
+    <div class="row">
+      <div class="dropdown-list" *ngIf="searchText">
+        <ul class="" *ngIf="results.length > 0" #listItem>
+          <li id={{i+1}} *ngFor="let data of results | filter: searchText; let i = index" tabIndex={{i+1}}
+            on-mouseover='mouseHoverEvent(i+1)'>
+            <p>{{data.id}}</p>
+            <p>{{data.name}}</p>
+            <p>{{data.address}},&nbsp;<span>{{data.pincode}}</span></p>
+          </li>
+          <li class="noUserBlock" *ngIf="(results | filter: searchText).length === 0">
+            <p>No User Found</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
